@@ -1,29 +1,78 @@
-name: Build Plugin MTVehicles
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-on:
-  push:
-    branches: [ "main", "master" ]
+  <groupId>nl.mtvehicles</groupId>
+  <artifactId>MTVehicles</artifactId>
+  <version>2.5.8-BSNL</version>
 
-jobs:
-  build:
-    runs-on: ubuntu-latest 
+  <properties>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-    steps:
-    - name: Mengambil Kode
-      uses: actions/checkout@v4
-    
-    - name: Menyiapkan Java 25
-      uses: actions/setup-java@v4
-      with:
-        java-version: '25'
-        distribution: 'temurin'
-        cache: maven
-        
-    - name: Memulai Proses Compile (Maven)
-      run: mvn clean package
-      
-    - name: Mengunggah Hasil File .jar (Artifact)
-      uses: actions/upload-artifact@v4
-      with:
-        name: MTVehicles-Plugin-BSNL 
-        path: target/*.jar
+  <repositories>
+    <repository>
+        <id>spigot-repo</id>
+        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+    <repository>
+        <id>placeholderapi</id>
+        <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+        <groupId>org.spigotmc</groupId>
+        <artifactId>spigot-api</artifactId>
+        <version>1.20.1-R0.1-SNAPSHOT</version> 
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.30</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.github.MilkBowl</groupId>
+        <artifactId>VaultAPI</artifactId>
+        <version>1.7</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>me.clip</groupId>
+        <artifactId>placeholderapi</artifactId>
+        <version>2.10.10</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.github.SkriptLang</groupId>
+        <artifactId>Skript</artifactId>
+        <version>2.6.4</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.github.EngineHub</groupId>
+        <artifactId>WorldGuard</artifactId>
+        <version>7.0.5</version>
+        <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
