@@ -1,0 +1,1 @@
+# bot-compile-java25
